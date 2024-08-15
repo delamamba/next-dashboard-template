@@ -21,16 +21,16 @@ Anda dapat membuat UI terpisah untuk setiap rute menggunakan file layout.tsx dan
 
 page.tsx adalah file khusus Next.js yang mengekspor komponen React, dan ini diperlukan agar rute dapat diakses. Dalam aplikasi Anda, Anda sudah memiliki file halaman: /app/page.tsx - ini adalah halaman beranda yang terkait dengan rute /.
 
-Untuk membuat rute bersarang, Anda dapat menyarangkan folder di dalam satu sama lain dan menambahkan file page.tsx di dalamnya. Misalnya:
+Untuk membuat rute bersarang, Anda dapat menyarangkan folder di dalam satu sama lain dan menambahkan file page.jsx di dalamnya. Misalnya:
 ![alt text](image-6.png)
-/app/dashboard/page.tsx terkait dengan path /dashboard. Mari kita buat halaman untuk melihat cara kerjanya!
+/app/dashboard/page.jsx terkait dengan path /dashboard. Mari kita buat halaman untuk melihat cara kerjanya!
 
 ### Membuat Halaman Dashboard
 
-Buat folder baru bernama dashboard di dalam /app. Kemudian, buat file page.tsx baru di dalam folder dashboard dengan konten berikut:
+Buat folder baru bernama dashboard di dalam /app. Kemudian, buat file page.jsx baru di dalam folder dashboard dengan konten berikut:
 
 ```javascript
-// /app/dashboard/page.tsx
+// /app/dashboard/page.jsx
 export default function Page() {
   return <p>Dashboard Page</p>;
 }
@@ -53,12 +53,12 @@ Luangkan waktu untuk menangani latihan ini, dan ketika Anda siap, perluas toggle
 
 ### Membuat Layout Dashboard
 
-Dashboard memiliki beberapa jenis navigasi yang dibagikan di antara beberapa halaman. Di Next.js, Anda dapat menggunakan file layout.tsx khusus untuk membuat UI yang dibagikan antara beberapa halaman. Mari kita buat layout untuk halaman dashboard!
+Dashboard memiliki beberapa jenis navigasi yang dibagikan di antara beberapa halaman. Di Next.js, Anda dapat menggunakan file layout.jsx khusus untuk membuat UI yang dibagikan antara beberapa halaman. Mari kita buat layout untuk halaman dashboard!
 
-Di dalam folder /dashboard, tambahkan file baru bernama layout.tsx dan tempelkan kode berikut:
+Di dalam folder /dashboard, tambahkan file baru bernama layout.jsx dan tempelkan kode berikut:
 
 ```javascript
-// /app/dashboard/layout.tsx
+// /app/dashboard/layout.jsx
 iimport SideNav from '@/app/ui/dashboard/sidenav';
 
 export default function Layout({ children }) {
@@ -85,19 +85,16 @@ Beberapa hal terjadi dalam kode ini, jadi mari kita uraikan:
 
 ### Root Layout
 
-Di Bab 3, Anda mengimpor font Inter ke layout lain: /app/layout.tsx. Sebagai pengingat:
+Di Bab 3, Anda mengimpor font Inter ke layout lain: /app/layout.jsx. Sebagai pengingat:
 
 ```javascript
 // /app/layout.jsx
-}
-import '@/app/ui/global.css';
-import { inter } from '@/app/ui/fonts';
-export default function RootLayout({
-  children,
-}) {
+import "@/app/ui/global.css";
+import { lusitana } from "@/app/ui/fonts";
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${lusitana.className} antialiased`}>{children}</body>
     </html>
   );
 }
@@ -105,4 +102,4 @@ export default function RootLayout({
 
 Ini disebut root layout dan diperlukan. UI apa pun yang Anda tambahkan ke root layout akan dibagikan di semua halaman dalam aplikasi Anda. Anda dapat menggunakan root layout untuk memodifikasi tag <html> dan <body>, serta menambahkan metadata (Anda akan belajar lebih banyak tentang metadata di bab selanjutnya).
 
-Karena layout baru yang baru saja Anda buat (/app/dashboard/layout.tsx) unik untuk halaman dashboard, Anda tidak perlu menambahkan UI apa pun ke root layout di atas.
+Karena layout baru yang baru saja Anda buat (/app/dashboard/layout.jsx) unik untuk halaman dashboard, Anda tidak perlu menambahkan UI apa pun ke root layout di atas.

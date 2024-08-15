@@ -22,6 +22,9 @@ Tambahkan gaya global ke aplikasi Anda dengan menavigasi ke /app/layout.tsx dan 
 
 ```javascript
 // /app/layout.js
+
+import "@/app/ui/global.css";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -31,11 +34,11 @@ export default function RootLayout({ children }) {
 }
 ```
 
-Dengan server pengembangan masih berjalan, simpan perubahan Anda dan lihat pratinjau di browser. Halaman beranda Anda sekarang harus terlihat seperti ini:
+Dengan server pengembangan masih berjalan, simpan perubahan Anda dan lihat pratinjau di browser. Halaman beranda Anda sekarang harus terlihat seperti ini:****
 ![alt text](image-2.png)
 Halaman dengan gaya dengan logo 'Acme', deskripsi, dan tautan login.
 
-Tapi tunggu sebentar, Anda tidak menambahkan aturan CSS apa pun, dari mana gaya ini berasal?
+Tapi tunggu **sebentar**, Anda tidak menambahkan aturan CSS apa pun, dari mana gaya ini berasal?
 
 Jika Anda melihat di dalam global.css, Anda akan melihat beberapa direktif @tailwind:
 
