@@ -25,11 +25,10 @@ export async function fetchLatestInvoices() {
       ORDER BY invoices.date DESC
       LIMIT 5`;
 
-    const latestInvoices = data.rows.map((invoice) => ({
+    return data.rows.map((invoice) => ({
       ...invoice,
       amount: formatCurrency(invoice.amount),
     }));
-    return latestInvoices;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
@@ -53,16 +52,11 @@ export async function fetchCardData() {
       invoiceStatusPromise,
     ]);
 
-    const numberOfInvoices = Number(data[0].rows[0].count ?? '0');
-    const numberOfCustomers = Number(data[1].rows[0].count ?? '0');
-    const totalPaidInvoices = formatCurrency(Number(data[2].rows[0].paid ?? '0'));
-    const totalPendingInvoices = formatCurrency(Number(data[2].rows[0].pending ?? '0'));
-
     return {
-      numberOfCustomers,
-      numberOfInvoices,
-      totalPaidInvoices,
-      totalPendingInvoices,
+      numberOfCustomers: Number(data[1].rows[0].count ?? '0'),
+      numberOfInvoices: Number(data[0].rows[0].count ?? '0'),
+      totalPaidInvoices: formatCurrency(Number(data[2].rows[0].paid ?? '0')),
+      totalPendingInvoices: formatCurrency(Number(data[2].rows[0].pending ?? '0')),
     };
   } catch (error) {
     console.error('Database Error:', error);
@@ -148,12 +142,10 @@ export async function fetchInvoiceById(id) {
       throw new Error('Invoice not found');
     }
 
-    const invoice = data.rows.map((invoice) => ({
-      ...invoice,
-      amount: formatCurrency(invoice.amount), // Convert amount from cents to dollars
-    }));
-
-    return invoice[0];
+    return {
+      ...data.rows[0],
+      amount: formatCurrency(data.rows[0].amount), // Convert amount from cents to dollars
+    };
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
